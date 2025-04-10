@@ -1,7 +1,9 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import ConfigDict
+from beanie import Document
 
 
-class Event(BaseModel):
+# Document Model
+class Event(Document):
     id: int
     title: str
     image: str
