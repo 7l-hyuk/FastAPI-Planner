@@ -17,7 +17,7 @@ def get_event():
 
 
 @event_router.post("/")
-async def create_evnet():
+async def create_event():
     return ""
 
 
