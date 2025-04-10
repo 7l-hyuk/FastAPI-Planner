@@ -18,7 +18,8 @@ class Event(BaseModel):
                 "image": "path/to",
                 "description": "This is FastAPI planner tutorial",
                 "tags": ["#FastAPI"],
-                "location": "제 1 실습관 207호"
+                "location": "제 1 실습관 207호",
+                "created_at": "2023-10-01T12:00:00"
             }
         }
     )
