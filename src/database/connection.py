@@ -3,7 +3,7 @@ from pydantic_settings import BaseSettings
 from motor.motor_asyncio import AsyncIOMotorClient
 from beanie import init_beanie, Document
 
-# from logger import logger
+from src.logger import logger
 from src.models.events import Event
 from src.models.users import User
 
@@ -19,10 +19,10 @@ class Settings(BaseSettings):
                 document_models=[Event, User]
             )
             # logger.info("database connection success")
-            print("database connection success")
+            logger.info("database connection success")
         except Exception as e:
             # logger.info(f"{e}")
-            print(f"{e}")
+            logger.info(f"{e}")
 
     model_config = ConfigDict(
         env_file='.env'
