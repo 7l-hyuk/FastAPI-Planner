@@ -5,16 +5,13 @@ import uvicorn
 from .routes.events import event_router
 from .routes.users import user_router
 
-from src.database.connection import Settings
-
-
-settings = Settings()
+from src.database.connection import initialize_database
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # TODO: Database initialize
-    await settings.initialize_database()
+    await initialize_database()
     yield
     # TODO: Database clear
 
