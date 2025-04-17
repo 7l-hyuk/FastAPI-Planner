@@ -18,10 +18,8 @@ class Settings(BaseSettings):
                 database=client.get_default_database(),
                 document_models=[Event, User]
             )
-            # logger.info("database connection success")
             logger.info("database connection success")
         except Exception as e:
-            # logger.info(f"{e}")
             logger.info(f"{e}")
 
     model_config = ConfigDict(
