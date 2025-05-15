@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from src.models.events import Event
+from src.models.events import Event, EventUpdate
 from src.database.connection import Database
 
 event_router = APIRouter(
@@ -29,7 +29,7 @@ async def create_event(event: Event):
 
 
 @event_router.put("/{id}")
-async def update_event(id: int, event: Event):
+async def update_event(id: int, event: EventUpdate):
     await event_db.update(id, event)
     return {"message": "Event updated successfully"}
 

@@ -2,7 +2,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from beanie import init_beanie, Document
 
 from src.utils.logger import logger
-from src.models.events import Event
+from src.models.events import Event, EventUpdate
 from src.models.users import User
 from src.config import settings
 
@@ -25,7 +25,6 @@ class Database:
 
     async def save(self, document: Document):
         await document.create()
-        return
 
     async def get_all(self):
         docs = await self.model.find_all().to_list()
@@ -36,9 +35,11 @@ class Database:
         return doc
 
     async def delete(self, id: int):
-        doc = await self.get(id)
+        doc = await self.model.get(id)
         await doc.delete()
 
-    async def update(self, id: int, body):
-        doc = await self.get(id)
+    async def update(self, id: int, body: EventUpdate):
+        doc = await self.model.get(id)
+        body = body.model_dump()
+        body = {"$set": {k: v for k, v in body.items() if v is not None}}
         await doc.update(body)
