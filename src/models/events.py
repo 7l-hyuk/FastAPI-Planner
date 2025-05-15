@@ -1,4 +1,4 @@
-from pydantic import ConfigDict
+from pydantic import ConfigDict, BaseModel
 from beanie import Document
 
 
@@ -25,3 +25,11 @@ class Event(Document):
             }
         }
     )
+
+
+class EventUpdate(BaseModel):
+    title: str | None = None
+    image: str | None = None
+    description: str | None = None
+    tags: list[str] | None = None
+    location: str | None = None
