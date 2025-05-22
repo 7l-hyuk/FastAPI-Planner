@@ -4,4 +4,6 @@ build/
 dist/
 wheels/
 *.egg-info
+
+# private key
 .env

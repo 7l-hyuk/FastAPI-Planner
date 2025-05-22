@@ -1,10 +1,24 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 import uvicorn
 from .routes.events import event_router
 from .routes.users import user_router
 
+from src.database.connection import initialize_database
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # TODO: Database initialize
+    await initialize_database()
+    yield
+    # TODO: Database clear
+
+app = FastAPI(
+    lifespan=lifespan
+)
+
 app.include_router(event_router)
 app.include_router(user_router)
 

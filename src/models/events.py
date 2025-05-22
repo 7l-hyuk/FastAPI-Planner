@@ -1,7 +1,9 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import ConfigDict, BaseModel
+from beanie import Document
 
 
-class Event(BaseModel):
+# Document Model
+class Event(Document):
     id: int
     title: str
     image: str
@@ -18,7 +20,16 @@ class Event(BaseModel):
                 "image": "path/to",
                 "description": "This is FastAPI planner tutorial",
                 "tags": ["#FastAPI"],
-                "location": "제 1 실습관 207호"
+                "location": "제 1 실습관 207호",
+                "created_at": "2023-10-01T12:00:00"
             }
         }
     )
+
+
+class EventUpdate(BaseModel):
+    title: str | None = None
+    image: str | None = None
+    description: str | None = None
+    tags: list[str] | None = None
+    location: str | None = None
